@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>adadadsads</p>
+    <form action="" method = 'POST' enctype="multipart/form-data">
+        {% csrf_token %}
+       
+        <input type="file" name="pdf_file" accept=".pdf">
+        <button type="submit">Upload</button>
+
+    </form>
+{% endblock content %}
