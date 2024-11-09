@@ -6,6 +6,8 @@ from .forms import BookForm
 
 def main(request):
 
+    
+
     form = BookForm()
 
     if request.method == "POST":
@@ -14,6 +16,10 @@ def main(request):
 
         if form.is_valid():
             form.save()
+            #print(book)
+            #user = request.user
+            #   print(user)
+            #user.books_read.add(book)  
     else:
         form = BookForm()
 

@@ -7,9 +7,7 @@ class Book(models.Model):
 
     path = models.FileField(upload_to='books/', blank=True, null=True)
 
-    class Meta:
-
-        def __str__(self):
-            return self.path
+    def __str__(self):
+        return str(self.path)
         
 
