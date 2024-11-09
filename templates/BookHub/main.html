@@ -1,13 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-<p>adadadsads</p>
+
+    <p>Ваши книги</p>
+
+    {% for book in user_books %}
+        <a href="#"><p>{{book}}</p></a>
+    {% endfor %}
+
+
     <form action="" method = 'POST' enctype="multipart/form-data">
-        {% csrf_token %}
-       
-
+        {% csrf_token %}  
         {{form}}
-
         {% comment %} <input type="file" name="pdf_file" accept=".pdf"> {% endcomment %}
         <button type="submit">Upload</button> 
 
