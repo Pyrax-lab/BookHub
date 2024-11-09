@@ -4,8 +4,8 @@
 
     <p>Ваши книги</p>
 
-    {% for book in user_books %}
-        <a href="#"><p>{{book}}</p></a>
+    {% for book_user in user_books %}
+        <a href="media/{{book_user}}"><p>{{book_user}}</p></a>
     {% endfor %}
 
 
