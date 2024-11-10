@@ -6,7 +6,7 @@ app_name = "BookHub"
 
 urlpatterns = [
     path('', views.main, name="BookHub"),
-    #path('<int:book_id>', views.book, name="book"),
+    path('bookmain', views.book, name="bookmain"),
 ]
 
 if settings.DEBUG:

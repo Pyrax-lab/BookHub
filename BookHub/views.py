@@ -6,6 +6,10 @@ from django.shortcuts import get_object_or_404
 from django.conf import settings
 
 import pdfplumber
+#import requests
+from bs4 import BeautifulSoup
+
+
 # import pdfplumber 
 
 # Create your views here.
@@ -43,11 +47,6 @@ def main(request):
     return render(request, "BookHub/main.html", context={'form':form, "user_books" : user_books})
 
 
+def book(request):
 
-# def book(request, book_id):
-#     get_book_name = get_object_or_404(Book, id = book_id)
-#    #book = f'{settings.BASE_DIR}{settings.MEDIA_URL}{get_book_name}'
-#    #book = f"{settings.MEDIA_URL}{book_name}"
-#     book = request.build_absolute_uri(f"{settings.MEDIA_URL}{get_book_name.path}")
-#     print(book)
-#     return render(request, "BookHub/book.html", context={"book":book})
+    return render(request, "BookHub/book.html")

@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
+
+    <div class="main_content" style ="margin: 100px;">
 
     <p>Ваши книги</p>
 
@@ -8,6 +12,10 @@
 
         <a href="media/{{book_user}}"><nav>{{book_user}}</nav></a>
         <nav>Страниц {{book_user.page}}</nav>
+
+        {% comment %} <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 7%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div> {% endcomment %}
 
     {% endfor %}
 
@@ -19,4 +27,6 @@
         <button type="submit">Upload</button> 
 
     </form>
+
+</div>
 {% endblock content %}
