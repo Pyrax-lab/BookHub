@@ -33,6 +33,7 @@ def main(request):
             return len(pdf.pages)
     
     books = user_books
+    print(books)
     for book in books:
         book.page = get_pages(str(f'media/{book.path}'))
         book.save()
