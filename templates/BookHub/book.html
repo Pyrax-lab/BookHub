@@ -1,0 +1,26 @@
+
+
+{% extends "base.html" %}
+
+{% load django_bootstrap5 %}
+
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="ratio ratio-16x9">
+    <iframe src="{{ book }}" title="PDF Viewer" width="100%" height="800px" allowfullscreen></iframe>
+</div>
+
+
+{% comment %} <div class="ratio ratio-16x9">
+    <iframe scr="file:///D:/Django%20BookHub/main/media/books/black_hat_python_programmirovanie_dlya_hakerov_i_pentesterov_.pdf" title="book" allowfullscreen></iframe>
+</div>  {% endcomment %}
+
+
+
+{% endblock content %}

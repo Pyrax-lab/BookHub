@@ -4,6 +4,7 @@ from .forms import BookForm
 from users.models import User
 from django.shortcuts import get_object_or_404
 from django.conf import settings
+
 import pdfplumber
 # import pdfplumber 
 
@@ -26,6 +27,7 @@ def main(request):
         form = BookForm()
 
 
+
     def get_pages(file_book):
         with pdfplumber.open(file_book) as pdf:
             return len(pdf.pages)
@@ -35,6 +37,7 @@ def main(request):
         book.page = get_pages(str(f'media/{book.path}'))
         book.save()
         # book = Book.objects.filter(path=i).update(page = get_pages(str(f"media/{i}")))
+
 
     return render(request, "BookHub/main.html", context={'form':form, "user_books" : user_books})
 

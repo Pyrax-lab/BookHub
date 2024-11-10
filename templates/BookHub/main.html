@@ -5,8 +5,10 @@
     <p>Ваши книги</p>
 
     {% for book_user in user_books %}
+
         <a href="media/{{book_user}}"><nav>{{book_user}}</nav></a>
         <nav>Страниц {{book_user.page}}</nav>
+
     {% endfor %}
 
 
