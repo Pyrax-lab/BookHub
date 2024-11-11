@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from tkinter import X
 
 from django.conf.global_settings import STATICFILES_DIRS
 
@@ -129,8 +130,7 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-STATIC_URL = 'static/' 
+STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
 MEDIA_URL = '/media/'
@@ -141,3 +141,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = "users.User"
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+X_FRAME_OPTIONS

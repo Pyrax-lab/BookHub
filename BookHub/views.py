@@ -5,9 +5,15 @@ from users.models import User
 from django.shortcuts import get_object_or_404
 from django.conf import settings
 
-import pdfplumber
-#import requests
+import requests
 from bs4 import BeautifulSoup
+
+
+
+
+
+import pdfplumber
+
 
 
 # import pdfplumber 
@@ -44,9 +50,20 @@ def main(request):
         # book = Book.objects.filter(path=i).update(page = get_pages(str(f"media/{i}")))
 
 
+        # Парсим страницу на которые мы находимся
+
+        
+
+       # print(soup)
+
+    
+
+
     return render(request, "BookHub/main.html", context={'form':form, "user_books" : user_books})
 
 
 def book(request):
 
     return render(request, "BookHub/book.html")
+
+
