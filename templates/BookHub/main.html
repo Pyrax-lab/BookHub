@@ -20,6 +20,14 @@
             width: 100%%;
             height: 600px;
         }
+
+        .total_div{
+            margin: 300px;
+            position: block;
+            width: 100%%;
+            height: 600px;
+        
+        }
         iframe {
             width: 100%;
             height: 700px;
@@ -47,11 +55,14 @@
     </style>
 
         
-
+        <div class = "total_div">
+            <p>asdadasdadsas</p>
         <div class="pdf-container" id="pdf-container">
+            
             <iframe id="pdf-iframe" src="http://127.0.0.1:8000/media/{{ book_user }}" ></iframe>
             <button class="fullscreen-btn" onclick="toggleFullScreen()">Развернуть на весь экран</button>
         </div>
+    </div>
 
 
 {% endfor %}

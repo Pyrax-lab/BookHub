@@ -19,3 +19,10 @@ class Book(models.Model):
         return str(self.path)
         
 
+class ChekDay(models.Model):
+
+    day = models.DateTimeField(auto_now_add=True)
+    count_of_read_pages = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.count_of_read_pages

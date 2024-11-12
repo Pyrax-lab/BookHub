@@ -42,11 +42,11 @@ def main(request):
         with pdfplumber.open(file_book) as pdf:
             return len(pdf.pages)
     
-    books = user_books
-    print(books)
-    for book in books:
-        book.page = get_pages(str(f'media/{book.path}'))
-        book.save()
+    # books = user_books
+    # print(books)
+    # for book in books:
+    #     book.page = get_pages(str(f'media/{book.path}'))
+    #     book.save()
         # book = Book.objects.filter(path=i).update(page = get_pages(str(f"media/{i}")))
 
 
