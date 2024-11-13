@@ -1,3 +1,42 @@
 img {
     width: 80px;
 }
+
+.pdf-container {
+    margin: 300px;
+    position: relative;
+    width: 100%;
+    height: 600px;
+}
+
+.total_div{
+    margin: 300px;
+    position: block;
+    width: 100%;
+    height: 600px;
+
+}
+iframe {
+    width: 100%;
+    height: 700px;
+}
+
+/* Стиль для кнопки полноэкранного режима */
+.fullscreen-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+    background-color:black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 100;
+}
+
+/* Полноэкранный режим */
+.fullscreen iframe {
+    width: 100vw;
+    height: 100vh;
+}
