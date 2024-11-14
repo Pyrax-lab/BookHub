@@ -38,6 +38,28 @@
 
     </form>
 
+
+    <nav aria-label="...">
+        <ul class="pagination justify-content-center">
+
+          <li class="page-item {% if not user_books.has_previous %} disabled {% endif %}" aria-current="page">
+            <a class = "page-link" href="{% if user_books.has_previous %}?page={{user_books.previous_page_number}}{% else %}#{% endif %}">Previous</a>
+          </li>
+
+        
+
+          {% for i in page_range %}
+            <li class="page-item {% if user_books.number == i %} active {% endif %}"><a class="page-link" href="?page={{i}}">{{i}}</a></li> </li>
+          {% endfor %}
+          
+          <li class="page-item {% if not user_books.has_next %} disabled {% endif %}" aria-current="page">
+            <a class="page-link" href="{% if user_books.has_next %}?page={{user_books.next_page_number}}{% else %}#{% endif %}">Next</a>
+         </li>
+          
+        </ul>
+      </nav>
+
+
 </div>
 
 <script>

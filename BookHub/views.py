@@ -28,6 +28,11 @@ def main(request):
     get_user = User.objects.all().filter(id = request.user.id)
     user_books = get_user[0].books_read.all()
 
+    page = request.GET.get("page", 1)
+
+    user_paginator = Paginator(user_books, 2)
+    user_books = user_paginator.page(page)
+
     form = BookForm()
     if request.method == "POST":
         form = BookForm(request.POST, request.FILES)
@@ -61,7 +66,7 @@ def main(request):
     
 
 
-    return render(request, "BookHub/main.html", context={'form':form, "user_books" : user_books})
+    return render(request, "BookHub/main.html", context={'form':form, "user_books" : user_books, "page_range": user_paginator.page_range})
 
 
 def book(request):
