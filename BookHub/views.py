@@ -4,6 +4,8 @@ from .forms import BookForm
 from users.models import User
 from django.shortcuts import get_object_or_404
 from django.conf import settings
+from django.core.paginator import Paginator
+
 
 import requests
 from bs4 import BeautifulSoup

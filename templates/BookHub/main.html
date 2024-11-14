@@ -4,31 +4,30 @@
 
 {% block content %}
 
-    <div class="main_content" style ="margin: 100px;">
+    <div class="main">
 
     <p>Ваши книги</p>
 
    
-
+<div class="container text-center">
+    <div class="row row-cols-2">
+        
     {% for book_user in user_books %}
-       
-    <style>
-        /* Стили для PDF, когда он в обычном режиме */
-        
-    </style>
 
-        
-        <div class = "total_div">
-            <p>asdadasdadsas</p>
-        <div class="pdf-container" id="pdf-container">
-            
-            <iframe id="pdf-iframe" src="http://127.0.0.1:8000/media/{{ book_user }}" ></iframe>
-            <button class="fullscreen-btn" onclick="toggleFullScreen()">Развернуть на весь экран</button>
-        </div>
+   
+          <div class="col">
+            <div class="pdf-container" id="pdf-container-{{forloop.counter}}">
+                <iframe id="pdf-iframe-{{forloop.counter}}" class="fullscreen" src="http://127.0.0.1:8000/media/{{ book_user }}" ></iframe>
+                <button class="fullscreen-btn" onclick="toggleFullScreen('pdf-container-{{ forloop.counter }}')">Развернуть на весь экран</button>
+            </div>
+          </div>
+
+    {% endfor %}
     </div>
+</div>
 
+        
 
-{% endfor %}
 
 
     <form action="" method = 'POST' enctype="multipart/form-data">
@@ -42,9 +41,8 @@
 </div>
 
 <script>
-    function toggleFullScreen() {
-        const container = document.getElementById('pdf-container');
-        
+    function toggleFullScreen(containerId) {
+        const container = document.getElementById(containerId);
         // Проверка, находится ли контейнер уже в полноэкранном режиме
         if (!document.fullscreenElement) {
             // Включаем полноэкранный режим
