@@ -8,7 +8,38 @@
 
     <p>Ваши книги</p>
 
-   
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="POST">
+            {% csrf_token %}
+            {{ form_read }}
+            <button type="submit" name="read_form">Saveeeeeee</button> 
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" name="read_form">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+          {% comment %} <form action="{% url "BookHub:count_read_pages" %}" method="POST">
+            {% csrf_token %}
+            {{form_read}} 
+            <button type="submit" name="read_form">Upload</button> 
+          </form>
+    {% endcomment %}
 <div class="container text-center">
     <div class="row row-cols-2">
         
@@ -18,7 +49,12 @@
           <div class="col">
             <div class="pdf-container" id="pdf-container-{{forloop.counter}}">
                 <iframe id="pdf-iframe-{{forloop.counter}}" class="fullscreen" src="http://127.0.0.1:8000/media/{{ book_user }}" ></iframe>
-                <button class="fullscreen-btn" onclick="toggleFullScreen('pdf-container-{{ forloop.counter }}')">Развернуть на весь экран</button>
+                <button class="fullscreen-btn" onclick="toggleFullScreen('pdf-container-{{ forloop.counter }}')">Fullscreen</button>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Indicate yore curent page</button>
+  
+  
+  
             </div>
           </div>
 
@@ -32,9 +68,9 @@
 
     <form action="" method = 'POST' enctype="multipart/form-data">
         {% csrf_token %}  
-        {{form}}
+        {{form_book}}
         {% comment %} <input type="file" name="pdf_file" accept=".pdf"> {% endcomment %}
-        <button type="submit">Upload</button> 
+        <button type="submit" name="book_form">Upload</button> 
 
     </form>
 
@@ -92,6 +128,7 @@
             }
             // Убираем стиль полноэкранного режима
             container.classList.remove('fullscreen');
+            container.classList.add()
         }
     }
 </script>
