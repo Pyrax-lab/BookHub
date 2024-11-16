@@ -14,6 +14,7 @@ class ChekDayForm(forms.ModelForm):
     class Meta:
         model = ChekDay
         fields = ["count_of_read_pages"]
+        
         widgets = {
-            'count_of_read_pages': forms.NumberInput(attrs={'min': 0, 'placeholder': 'Введите число страниц'}),
+            'count_of_read_pages': forms.NumberInput(attrs={'min': 0, 'placeholder': 'Введите число страниц', }),
         }

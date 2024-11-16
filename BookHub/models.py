@@ -25,4 +25,4 @@ class ChekDay(models.Model):
     count_of_read_pages = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.count_of_read_pages
+        return str(self.pk)

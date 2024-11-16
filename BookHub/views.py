@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Book
+from .models import Book, ChekDay
 from .forms import BookForm, ChekDayForm
 from users.models import User
 from django.shortcuts import get_object_or_404
@@ -48,7 +48,7 @@ def main(request):
     form_read = ChekDayForm()
 
     if request.method == "POST" and 'read_form' in request.POST:
-        print("11")
+       
         form_read = ChekDayForm(request.POST)
         if form_read.is_valid():
             form_read.save()
@@ -102,3 +102,15 @@ def book(request):
 #         form_book = ChekDayForm()
 
 #     return render(request, "BookHub/main.html", context={"form_read":form_book})
+
+
+
+def check_days(request):
+    check1 = ChekDay.objects.all()
+
+    count_pages = 0
+    day_curent = 0
+    for i in check1:
+        print(i.day.date().day)
+
+    return render(request, "BookHub/days.html", context={"check":check1})
