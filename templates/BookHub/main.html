@@ -9,26 +9,6 @@
     <p>Ваши книги</p>
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="" method="POST">
-            {% csrf_token %}
-            {{ form_read }}
-            <button type="submit" name="read_form">Save changes</button> 
-          </form>
-        </div>
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div>
 
 
   
@@ -41,22 +21,46 @@
 <div class="container text-center">
     <div class="row row-cols-2">
         
-    {% for book_user in user_books %}
+      
+{% for book_user in user_books %}
+      <div class="col">
+          <div class="pdf-container" id="pdf-container-{{ forloop.counter }}">
+              <iframe id="pdf-iframe-{{ forloop.counter }}" class="fullscreen" src="http://127.0.0.1:8000/media/{{ book_user }}"></iframe>
+              <button class="fullscreen-btn" onclick="toggleFullScreen('pdf-container-{{ forloop.counter }}')">Fullscreen</button>
+              
+              <!-- Кнопка открытия модального окна -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-{{ forloop.counter }}">
+                  Indicate your current page
+              </button>
 
-   
-          <div class="col">
-            <div class="pdf-container" id="pdf-container-{{forloop.counter}}">
-                <iframe id="pdf-iframe-{{forloop.counter}}" class="fullscreen" src="http://127.0.0.1:8000/media/{{ book_user }}" ></iframe>
-                <button class="fullscreen-btn" onclick="toggleFullScreen('pdf-container-{{ forloop.counter }}')">Fullscreen</button>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Indicate yore curent page</button>
+              <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" style="width: 25%">25%</div>
+              </div>
   
-  
-  
-            </div>
+              <!-- Модальное окно для каждой книги -->
+              <div class="modal fade" id="modal-{{ forloop.counter }}" tabindex="-1" aria-labelledby="modalLabel-{{ forloop.counter }}" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h1 class="modal-title fs-5" id="modalLabel-{{ forloop.counter }}">Specify the current page for "{{ book_user.title }}"</h1>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                              <form action="" method="POST">
+                                  {% csrf_token %}
+                                  <!-- Скрытое поле с id книги -->
+                                  <input type="hidden" name="book_id" value="{{ book_user.id }}">
+                                  {{ form_read }}
+                                  <button type="submit" name="read_form">Save changes</button>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
           </div>
-
-    {% endfor %}
+      </div>
+  {% endfor %}
+  
     </div>
 </div>
 

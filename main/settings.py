@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'BookHub',
     "users",
 
-    'django_bootstrap5'
+    'django_bootstrap5',
+
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

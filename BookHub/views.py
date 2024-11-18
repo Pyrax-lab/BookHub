@@ -44,14 +44,25 @@ def main(request):
     else:
         form_book = BookForm()
 
+    read_pages = 0
 
     form_read = ChekDayForm()
+
 
     if request.method == "POST" and 'read_form' in request.POST:
        
         form_read = ChekDayForm(request.POST)
         if form_read.is_valid():
             form_read.save()
+            
+            #print(form_read)
+            # book_total_pages = Book.objects.all()
+            # print(book_total_pages)
+            curent_book = request.POST['book_id']
+            
+            read_pages = request.POST["count_of_read_pages"]
+            book_id = get_object_or_404(Book, id = curent_book)
+            ChekDay.objects.create(book = book_id)
             
             redirect('/')
     else:
@@ -62,7 +73,7 @@ def main(request):
         with pdfplumber.open(file_book) as pdf:
             return len(pdf.pages)
     
-    # books = user_books
+    # books = user_books    
     # print(books)
     # for book in books:
     #     book.page = get_pages(str(f'media/{book.path}'))
@@ -77,9 +88,10 @@ def main(request):
        # print(soup)
 
     
+    
 
 
-    return render(request, "BookHub/main.html", context={'form_book':form_book, "form_read":form_read, "user_books" : user_books, "page_range": user_paginator.page_range})
+    return render(request, "BookHub/main.html", context={'form_book':form_book, "form_read":form_read,"read_pages":read_pages, "user_books" : user_books, "page_range": user_paginator.page_range})
 
 
 def book(request):
