@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("BookHub.urls")),
     path("user/", include("users.urls")),
+    path("api/", include("bookhub_api.urls")),
 ]
 
 if settings.DEBUG:

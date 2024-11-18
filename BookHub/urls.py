@@ -9,6 +9,7 @@ urlpatterns = [
     path('bookmain', views.book, name="bookmain"),
     path("check_days", views.check_days, name="check_days"),
     
+    
 ]
 
 if settings.DEBUG:

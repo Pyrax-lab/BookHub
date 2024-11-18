@@ -46,7 +46,9 @@ INSTALLED_APPS = [
 
     'django_bootstrap5',
 
-    'rest_framework'
+    'rest_framework',
+
+    'bookhub_api',
 ]
 
 MIDDLEWARE = [
