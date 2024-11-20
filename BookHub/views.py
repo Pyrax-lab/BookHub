@@ -8,6 +8,7 @@ from django.core.paginator import Paginator
 
 
 import requests
+import time
 from bs4 import BeautifulSoup
 
 
@@ -53,16 +54,16 @@ def main(request):
        
         form_read = ChekDayForm(request.POST)
         if form_read.is_valid():
-            form_read.save()
             
-            #print(form_read)
-            # book_total_pages = Book.objects.all()
-            # print(book_total_pages)
             curent_book = request.POST['book_id']
-            
             read_pages = request.POST["count_of_read_pages"]
+
+
             book_id = get_object_or_404(Book, id = curent_book)
-            ChekDay.objects.create(book = book_id)
+            a = ChekDay.objects.create(count_of_read_pages=read_pages)
+            a.book.add(book_id)
+            a.save()
+            
             
             redirect('/')
     else:
@@ -120,9 +121,14 @@ def book(request):
 def check_days(request):
     check1 = ChekDay.objects.all()
 
-    count_pages = 0
-    day_curent = 0
-    for i in check1:
-        print(i.day.date().day)
+    local_time = time.localtime().tm_mday
+    read_today = 0
 
-    return render(request, "BookHub/days.html", context={"check":check1})
+    for i in check1:
+        if i.day.day == local_time:
+            read_today += i.count_of_read_pages
+
+    print(read_today)
+
+
+    return render(request, "BookHub/days.html", context={"check":check1, "read_today" : read_today, "days":range(365)})

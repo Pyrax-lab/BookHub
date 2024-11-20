@@ -2,7 +2,71 @@
 
 
 {% block content %}
+<div class="main">
 
+    {{read_today}}
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Calendar</title>
+    <style>
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(53, 1fr); /* 52 недели + 1 для подписей */
+            gap: 4px;
+        }
+        .week-label, .day {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            display: inline-block;
+        }
+        .week-label {
+            text-align: center;
+            font-size: 10px;
+            margin-bottom: 4px;
+        }
+        .day {
+            background-color: #ebedf0; /* Default color */
+        }
+        .day.level-1 { background-color: #c6e48b; }
+        .day.level-2 { background-color: #7bc96f; }
+        .day.level-3 { background-color: #239a3b; }
+        .day.level-4 { background-color: #196127; }
+        .tooltip {
+            position: relative;
+        }
+        .tooltip:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            white-space: nowrap;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div class="calendar">
+        {% for i in days %}
+                <div 
+                    class="day level-{% if read_today < 2 %}1{% elif read_today > 2 and read_today < 5 %}2{% elif read_today > 5 and read_today < 15 %}3{% elif read_today > 15 %}4{% endif %}" 
+                    data-tooltip="activities"
+                ></div>
+        {% endfor %}   
+    </div>
+</body>
+</html>
+
+</div>
 
 
 {% endblock content %}
