@@ -1,15 +1,16 @@
 from django.shortcuts import render
 from rest_framework import generics
 from django.contrib.auth import get_user_model
-from .serializers import UserSerializer
+from .serializers import BookList
+from BookHub.models import Book
 
 # Create your views here.
 
 
-class UsersList(generics.ListAPIView):
+class BookList(generics.ListCreateAPIView, generics.DestroyAPIView):
 
-    queryset = get_user_model()
-    serializer_class = UserSerializer()
+    queryset = Book.objects.all()
+    serializer_class = BookList
 
 
    
