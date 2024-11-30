@@ -26,53 +26,60 @@ import pdfplumber
 
 def main(request):
 
-    get_user = User.objects.all().filter(id = request.user.id)
-    user_books = get_user[0].books_read.all()
+    print(request.user.is_authenticated,"----")
 
-    page = request.GET.get("page", 1)
+    if request.user.is_authenticated :
+        
+        get_user = User.objects.all().filter(id = request.user.id)
+        
+        user_books = get_user[0].books_read.all()
 
-    user_paginator = Paginator(user_books, 4)
-    user_books = user_paginator.page(page)
+        page = request.GET.get("page", 1)
 
-    form_book = BookForm()
-    
-    if request.method == "POST" and 'book_form' in request.POST:
-        form_book = BookForm(request.POST, request.FILES)
-        if form_book.is_valid():
-            book = form_book.save()
-            user = request.user
-            user.books_read.add(book)  
-    else:
+        user_paginator = Paginator(user_books, 4)
+        user_books = user_paginator.page(page)
+        
+ 
+
         form_book = BookForm()
+    
+        if request.method == "POST" and 'book_form' in request.POST:
+            form_book = BookForm(request.POST, request.FILES)
+            if form_book.is_valid():
+                book = form_book.save()
+                user = request.user
+                user.books_read.add(book)  
+        else:
+            form_book = BookForm()
 
-    read_pages = 0
+        read_pages = 0
 
-    form_read = ChekDayForm()
-
-
-    if request.method == "POST" and 'read_form' in request.POST:
-       
-        form_read = ChekDayForm(request.POST)
-        if form_read.is_valid():
-            
-            curent_book = request.POST['book_id']
-            read_pages = request.POST["count_of_read_pages"]
-
-
-            book_id = get_object_or_404(Book, id = curent_book)
-            a = ChekDay.objects.create(count_of_read_pages=read_pages)
-            a.book.add(book_id)
-            a.save()
-            
-            
-            redirect('/')
-    else:
         form_read = ChekDayForm()
 
 
-    def get_pages(file_book):
-        with pdfplumber.open(file_book) as pdf:
-            return len(pdf.pages)
+        if request.method == "POST" and 'read_form' in request.POST:
+       
+            form_read = ChekDayForm(request.POST)
+            if form_read.is_valid():
+            
+                curent_book = request.POST['book_id']
+                read_pages = request.POST["count_of_read_pages"]
+
+
+                book_id = get_object_or_404(Book, id = curent_book)
+                a = ChekDay.objects.create(count_of_read_pages=read_pages)
+                a.book.add(book_id)
+                a.save()
+            
+            
+                redirect('/')
+        else:
+            form_read = ChekDayForm()
+
+
+        def get_pages(file_book):
+            with pdfplumber.open(file_book) as pdf:
+                return len(pdf.pages)
     
     # books = user_books    
     # print(books)
@@ -89,10 +96,13 @@ def main(request):
        # print(soup)
 
     
-    
+        user_auth = request.user
+        return render(request, "BookHub/main.html", context={"user_auth": user_auth,'form_book':form_book, "form_read":form_read,"read_pages":read_pages, "user_books" : user_books, "page_range": user_paginator.page_range})
 
 
-    return render(request, "BookHub/main.html", context={'form_book':form_book, "form_read":form_read,"read_pages":read_pages, "user_books" : user_books, "page_range": user_paginator.page_range})
+    else:
+        return redirect('BookHub:bookmain')
+
 
 
 def book(request):
